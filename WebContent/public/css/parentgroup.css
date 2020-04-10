@@ -1,0 +1,36 @@
+@CHARSET "ISO-8859-1";
+.sgdetail {
+	width:100%;
+	padding: 10px;
+	margin: 10px;
+	float:left;
+}
+.selectdiv {
+	padding : 10px;
+	margin-right:10px;
+	float:left;
+}
+.select{
+	width:240px;
+	
+}
+.nvgBtn {
+	width:100px;
+	padding: 10px;
+	margin: 10px;
+	float:left;
+}
+.assignSG {
+	width:380px;
+	padding: 10px;
+	margin: 10px;
+	float:left;
+}
+.assignselect {
+	width:300px;
+	padding : 10px;
+}
+.abtn {
+	width:300px;
+	height:30px;
+}

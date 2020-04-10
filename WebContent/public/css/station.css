@@ -1,0 +1,61 @@
+@CHARSET "ISO-8859-1";
+
+.divBody {
+	margin-top: 15px;
+	clear: both;
+}
+
+.divContent {
+	width: 460px;
+	float: left;
+	color: black;
+}
+
+.text {
+	margin-left: 10px;
+	width: 200px;
+}
+
+label {
+	width: 180px;
+}
+
+.header {
+	border-bottom: 2px dotted #6484A8;
+	background-color: #bf3e11;
+	color: white;
+	padding: 3px;
+	font-family: Trebuchet MS, Verdana, Arial;
+	font-size: 14px;
+	width: 850px;
+	MARGIN-TOP: -30PX;
+	clear: both;
+}
+
+.subheader {
+	border-bottom: 2px dotted #6484A8;
+	background-color: #F5D0A9;
+	padding: 3px;
+	font-family: Trebuchet MS, Verdana, Arial;
+	font-size: 14px;
+	width: 850px;
+	MARGIN-TOP: 10PX;
+	clear: both;
+	height: 30px;
+}
+
+.scrollable {
+	height: 100px; /* or any value */
+	overflow-y: auto;
+}
+
+.closeBtn {
+	margin-top: -35px;
+	float: right;
+	margin-right: 10px;
+}
+
+.select {
+	margin-left: 11px;
+	width: 200px;
+}

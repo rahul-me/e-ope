@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:context="http://www.springframework.org/schema/context"
+ xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:p="http://www.springframework.org/schema/p"
+ xmlns:tx="http://www.springframework.org/schema/tx"
+ xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/tx  
+     	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+     	
+     	<context:component-scan base-package="com.gridscape" />
+<!--  		<import resource="classpath:META-INF/cxf/cxf.xml"/>
+		<import resource="classpath:META-INF/cxf/cxf-extension-xml.xml"/>
+		<import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>  -->	
+		
+ 		<context:property-placeholder location="classpath*:*.properties" />
+ 		<mvc:annotation-driven />
+ 		
+ 		<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${database.driver}" />
+		<property name="url" value="${database.url}" />
+		<property name="username" value="${database.user}" />
+		<property name="password" value="${database.password}" />
+		</bean>
+ 
+ 		<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+			<property name="dataSource" ref="dataSource" />
+			<property name="packagesToScan" value="com.gridscape.model" />		
+			<property name="hibernateProperties">
+				<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.jdbc.fetch_size">100</prop>
+				<!-- <prop key= "hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</prop>      
+			    <prop key="hibernate.c3p0.acquire_increment">5</prop>
+			    <prop key="hibernate.c3p0.idle_test_period">1800</prop>
+			    <prop key="hibernate.c3p0.max_size">7</prop>
+			    <prop key="hibernate.c3p0.max_statements">50</prop>
+			    <prop key="hibernate.c3p0.min_size">5</prop>
+			    <prop key="hibernate.c3p0.timeout">200</prop> -->
+				</props>	
+			</property>		
+		</bean>
+		
+ 		<bean id="hibernateTransactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+		
+ 		<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
+			<property name="viewClass"  value="org.springframework.web.servlet.view.JstlView" />  
+			<property name="prefix" value="/WEB-INF/jsp/" /> 
+			<property name="suffix" value=".jsp" /> 
+		</bean>
+		
+		<bean id="parameters" class="com.gridscape.helpers.Parameters">
+			<property name="mailEmailAddress" value="${mail.EmailAddress}"></property>
+			<property name="mailUserName" value="${mail.UserName}"></property>
+			<property name="mailPassword" value="${mail.Password}"></property>
+			<property name="sessionTimeOut" value="${min.sessionTimeOut}"></property>
+		</bean>
+				
+		<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	         <!-- setting maximum upload size -->
+	        <property name="maxUploadSize" value="10000000" />
+   		</bean>
+
+		<mvc:interceptors>
+			<bean class="com.gridscape.interceptor.MicrogridInterceptor">
+			</bean>
+		</mvc:interceptors>
+		<bean id="timeResourceImpl" class="com.gridscape.sep.controller.TimeResourceImpl" />
+ </beans>
